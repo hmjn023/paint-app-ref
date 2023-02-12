@@ -1,0 +1,14 @@
+###############
+application.py
+###############
+
+.. code-block:: python
+    
+    class Application:
+        def __init__(self):
+            self.root = None
+            self.menu = None
+            self.canvas = None
+            self.tool = None
+        
+        

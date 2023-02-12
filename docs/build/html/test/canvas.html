@@ -1,0 +1,312 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="jp">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>canvas.py &#8212; paint-app  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+
+    
+    
+     
+        <script src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="menu.py" href="menu.html" />
+    <link rel="prev" title="application.py" href="application.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="menu.html" title="menu.py"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="application.html" title="application.py"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">paint-app  documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">canvas.py</a></li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="canvas-py">
+<h1>canvas.py<a class="headerlink" href="#canvas-py" title="Permalink to this heading">¶</a></h1>
+<section id="id1">
+<h2>依存関係<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+
+<span class="kn">from</span> <span class="nn">tool</span> <span class="kn">import</span> <span class="n">Tool</span><span class="p">,</span><span class="n">Mode</span>
+</pre></div>
+</div>
+</section>
+<section id="class-canvas">
+<h2>class Canvas<a class="headerlink" href="#class-canvas" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Canvas</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f_canvas</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w_canvas</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<section id="create-canvas-self-root">
+<h3>create_canvas(self, root)<a class="headerlink" href="#create-canvas-self-root" title="Permalink to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">キャンバスを作成し、ウィジェットとして動作するようにしている</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_canvas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">create_frame</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">create_widgits</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="create-frame-self-root">
+<h3>create_frame(self, root)<a class="headerlink" href="#create-frame-self-root" title="Permalink to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">描画フレームを作成している</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">f_canvas</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span>
+        <span class="n">root</span><span class="p">,</span> <span class="n">bg</span> <span class="o">=</span> <span class="s2">&quot;#CCFF99&quot;</span><span class="p">,</span>
+        <span class="n">padx</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">pady</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">f_canvas</span><span class="o">.</span><span class="n">place</span><span class="p">(</span>
+        <span class="n">relx</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">rely</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">relwidth</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">relheight</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="create-widgits-self">
+<h3>create_widgits(self)<a class="headerlink" href="#create-widgits-self" title="Permalink to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">ウィジェットを作成している</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_widgits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_canvas</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Canvas</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f_canvas</span><span class="p">,</span> <span class="n">bg</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_canvas</span><span class="o">.</span><span class="n">place</span><span class="p">(</span>
+        <span class="n">relx</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">rely</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">relwidth</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">relheight</span> <span class="o">=</span> <span class="mf">0.8</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_canvas</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Button-1&gt;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_key_left</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_canvas</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;B1-Motion&gt;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_key_left_dragging</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="set-mode-self-mode">
+<h3>set_mode(self, mode)<a class="headerlink" href="#set-mode-self-mode" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">set_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+</pre></div>
+</div>
+</section>
+<section id="on-key-left-self-event">
+<h3>on_key_left(self, event)<a class="headerlink" href="#on-key-left-self-event" title="Permalink to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">左クリックをしたときに動作する関数</div>
+<div class="line">キャンバス上に線を作成</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_key_left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">Tool</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="n">Mode</span><span class="o">.</span><span class="n">PEN</span> <span class="ow">or</span> <span class="n">Tool</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="n">Mode</span><span class="o">.</span><span class="n">ERASER</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">w_canvas</span><span class="o">.</span><span class="n">create_line</span><span class="p">(</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+            <span class="n">fill</span> <span class="o">=</span> <span class="n">Tool</span><span class="o">.</span><span class="n">color</span><span class="p">,</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="n">Tool</span><span class="o">.</span><span class="n">thickness</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="on-key-left-dragging-self-event">
+<h3>on_key_left_dragging(self, event)<a class="headerlink" href="#on-key-left-dragging-self-event" title="Permalink to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">左クリック長押しをしたときに動作する関数</div>
+<div class="line">キャンバス上に線を作成</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_key_left_dragging</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">w_canvas</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_id</span><span class="p">)</span>
+    <span class="n">points</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">event</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">y</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_canvas</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_id</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="save-file-self-file-name">
+<h3>save_file(self, file_name)<a class="headerlink" href="#save-file-self-file-name" title="Permalink to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">Canvasの内容をファイルとして保存</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_canvas</span><span class="o">.</span><span class="n">postscript</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">colormode</span> <span class="o">=</span> <span class="s2">&quot;color&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="open-image-on-canvas-self-img">
+<h3>open_image_on_canvas(self, img)<a class="headerlink" href="#open-image-on-canvas-self-img" title="Permalink to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">キャンバス上に画像を読み込む</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">open_image_on_canvas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">img</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_canvas</span><span class="o">.</span><span class="n">create_image</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">,</span>
+        <span class="n">anchor</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">NW</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="new-canvas-self">
+<h3>new_canvas(self)<a class="headerlink" href="#new-canvas-self" title="Permalink to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">無地の新しいキャンバスに遷移</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">new_canvas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_canvas</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">create_widgits</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">canvas.py</a><ul>
+<li><a class="reference internal" href="#id1">依存関係</a></li>
+<li><a class="reference internal" href="#class-canvas">class Canvas</a><ul>
+<li><a class="reference internal" href="#create-canvas-self-root">create_canvas(self, root)</a></li>
+<li><a class="reference internal" href="#create-frame-self-root">create_frame(self, root)</a></li>
+<li><a class="reference internal" href="#create-widgits-self">create_widgits(self)</a></li>
+<li><a class="reference internal" href="#set-mode-self-mode">set_mode(self, mode)</a></li>
+<li><a class="reference internal" href="#on-key-left-self-event">on_key_left(self, event)</a></li>
+<li><a class="reference internal" href="#on-key-left-dragging-self-event">on_key_left_dragging(self, event)</a></li>
+<li><a class="reference internal" href="#save-file-self-file-name">save_file(self, file_name)</a></li>
+<li><a class="reference internal" href="#open-image-on-canvas-self-img">open_image_on_canvas(self, img)</a></li>
+<li><a class="reference internal" href="#new-canvas-self">new_canvas(self)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="application.html"
+                          title="Previous page">&larr; application.py</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="menu.html"
+                          title="Next page">&rarr; menu.py</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/test/canvas.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="menu.html" title="menu.py"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="application.html" title="application.py"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">paint-app  documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">canvas.py</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, hmj023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

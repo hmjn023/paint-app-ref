@@ -1,0 +1,280 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="jp">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>tool.py &#8212; paint-app  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+
+    
+    
+     
+        <script src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="menu.py" href="menu.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="menu.html" title="menu.py"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">paint-app  documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">tool.py</a></li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="tool-py">
+<h1>tool.py<a class="headerlink" href="#tool-py" title="Permalink to this heading">¶</a></h1>
+<section id="id1">
+<h2>依存関係<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+</pre></div>
+</div>
+</section>
+<section id="class-tool">
+<h2>class Tool<a class="headerlink" href="#class-tool" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Tool</span><span class="p">:</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span>
+    <span class="n">thickness</span> <span class="o">=</span> <span class="mi">5</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f_tool</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w_b_pen</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w_thickbar</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">img_pen</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;images/pen_icon.png&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">img_eraser</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;images/eraser_icon.png&quot;</span><span class="p">)</span>
+        <span class="n">Tool</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">IntVar</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="create-tool-self-root">
+<h3>create_tool(self, root)<a class="headerlink" href="#create-tool-self-root" title="Permalink to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">フレーム、ウィジェットを作成している</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_tool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">create_frame</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">create_widgits</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="create-frame-self-root">
+<h3>create_frame(self, root)<a class="headerlink" href="#create-frame-self-root" title="Permalink to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">フレームを作成している</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">f_tool</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">bg</span> <span class="o">=</span> <span class="s2">&quot;#FFFF99&quot;</span><span class="p">,</span> <span class="n">pady</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">padx</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">f_tool</span><span class="o">.</span><span class="n">place</span><span class="p">(</span>
+        <span class="n">relx</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">rely</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">relwidth</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">relheight</span> <span class="o">=</span> <span class="mf">0.6</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="create-widgits-self">
+<h3>create_widgits(self)<a class="headerlink" href="#create-widgits-self" title="Permalink to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">ウィジェットの定義をしている</div>
+<div class="line">ここでペン、消しゴム、太さ調整のバーの定義をしている</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_widgits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_b_pen</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f_tool</span><span class="p">,</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Pen&quot;</span><span class="p">,</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">img_pen</span><span class="p">,</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_button_click</span><span class="p">(</span><span class="n">Mode</span><span class="o">.</span><span class="n">PEN</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_b_eraser</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f_tool</span><span class="p">,</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Eraser&quot;</span><span class="p">,</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">img_eraser</span><span class="p">,</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_button_click</span><span class="p">(</span><span class="n">Mode</span><span class="o">.</span><span class="n">ERASER</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_thickbar</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f_tool</span><span class="p">,</span>
+        <span class="n">orient</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">,</span>
+        <span class="n">from_</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">to</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="n">variable</span> <span class="o">=</span> <span class="n">Tool</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Thickness&quot;</span>
+    <span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_b_pen</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_b_eraser</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w_thickbar</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="on-button-click-self-mode">
+<h3>on_button_click(self, mode)<a class="headerlink" href="#on-button-click-self-mode" title="Permalink to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">各種ボタンを押したときのモードの切り替わりを制御</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_button_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">Mode</span><span class="o">.</span><span class="n">PEN</span><span class="p">:</span>
+        <span class="n">Tool</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">Mode</span><span class="o">.</span><span class="n">PEN</span>
+        <span class="n">Tool</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w_b_pen</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">DISABLED</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w_b_eraser</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">NORMAL</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">Mode</span><span class="o">.</span><span class="n">ERASER</span><span class="p">:</span>
+        <span class="n">Tool</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">Mode</span><span class="o">.</span><span class="n">ERASER</span>
+        <span class="n">Tool</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w_b_eraser</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">DISABLED</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w_b_pen</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">NORMAL</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Argue Error&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="class-mode-enum">
+<h2>class Mode(Enum)<a class="headerlink" href="#class-mode-enum" title="Permalink to this heading">¶</a></h2>
+<div class="line-block">
+<div class="line">モードを管理するためのクラス</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">PEN</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">ERASER</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">tool.py</a><ul>
+<li><a class="reference internal" href="#id1">依存関係</a></li>
+<li><a class="reference internal" href="#class-tool">class Tool</a><ul>
+<li><a class="reference internal" href="#create-tool-self-root">create_tool(self, root)</a></li>
+<li><a class="reference internal" href="#create-frame-self-root">create_frame(self, root)</a></li>
+<li><a class="reference internal" href="#create-widgits-self">create_widgits(self)</a></li>
+<li><a class="reference internal" href="#on-button-click-self-mode">on_button_click(self, mode)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-mode-enum">class Mode(Enum)</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="menu.html"
+                          title="Previous page">&larr; menu.py</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/test/tool.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="menu.html" title="menu.py"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">paint-app  documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">tool.py</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, hmj023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
